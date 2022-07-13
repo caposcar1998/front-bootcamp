@@ -1,7 +1,7 @@
 import { Button } from '@mui/material'
 import { Container } from '@mui/system'
 
-function NoPage() {
+export default function NoPage() {
   return (
   <Container>
     <h1> No page found </h1>
@@ -10,5 +10,3 @@ function NoPage() {
   </Container>
   )
 }
-
-export default NoPage

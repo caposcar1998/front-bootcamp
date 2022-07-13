@@ -4,12 +4,7 @@ import { Box } from '@mui/material'
 export default function Login() {
   return (
     <>
-      <Box
-        display="flex"
-        flexDirection="column"
-        alignItems="center"
-        justifyContent="center"
-      >
+      <Box height="60%" width="100%">
         <LoginForm />
       </Box>
     </>
