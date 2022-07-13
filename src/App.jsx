@@ -1,18 +1,19 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import Main from './pages/Main'
-import NoPage from './pages/NoPage'
-import Users from './pages/Users'
+import { Login, User, NoPage } from 'pages'
+import { Layout } from 'components'
 
 function App() {
   return (
-    <div className='App'>
-      <BrowserRouter>
-      <Routes>
-        <Route path='/' element={<Main />} />
-          <Route path='users' element={<Users />} />
-          <Route path='*' element={<NoPage />} />
-      </Routes>
-      </BrowserRouter>
+    <div style={{ height: '100vh', width: '100vw' }}>
+      <Layout>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Login />} />
+            <Route path="users" element={<User />} />
+            <Route path="*" element={<NoPage />} />
+          </Routes>
+        </BrowserRouter>
+      </Layout>
     </div>
   )
 }
