@@ -1,5 +1,7 @@
+import CreateUser from '../components/CreateUser'
+
 function Users() {
-  return <h1>Hola hola</h1>
+  return <CreateUser/>
 }
 
 export default Users
