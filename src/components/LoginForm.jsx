@@ -33,7 +33,8 @@ export default function LoginForm() {
         height: '80%',
         minHeight: '200px',
         width: '80%',
-        minWidth: '300px'
+        minWidth: '300px',
+        margin: '0 auto'
       }}
     >
       <Paper
