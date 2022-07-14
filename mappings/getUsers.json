@@ -1,0 +1,13 @@
+{
+    "request": {
+      "urlPathPattern": "/api/v1/users",
+      "method": "GET"
+    },
+    "response": {
+      "status": 200,
+      "body": "[ {'Id':1, 'FirstName':'Oscar', 'LastName':'Contreras', 'Email':'oscar@oscar.co', 'Password': '123456'}, {'Id':2, 'FirstName':'Cristian', 'LastName':'Leyenda', 'Email':'cristian@cristian.co', 'Password': '654321'} ]",
+      "headers": {
+        "Content-Type": "application/json"
+      }
+    }
+  }
