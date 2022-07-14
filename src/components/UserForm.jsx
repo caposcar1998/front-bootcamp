@@ -2,7 +2,7 @@ import { Button, Paper, TextField } from '@mui/material'
 import { Box } from '@mui/system'
 import { useState } from 'react'
 
-function CreateUser() {
+export default function UserForm() {
   const [name, setName] = useState('')
   const [address, setAddress] = useState('')
   const [username, setUserName] = useState('')
@@ -68,5 +68,3 @@ function CreateUser() {
     </Paper>
   )
 }
-
-export default CreateUser
