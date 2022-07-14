@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import { Login, User, NoPage } from 'pages'
+import { Login, User, Users, NoPage } from 'pages'
 import { Layout } from 'components'
 
 function App() {
@@ -9,7 +9,8 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Login />} />
-            <Route path="users" element={<User />} />
+            <Route path="user" element={<User />} />
+            <Route path="users" element={<Users />} />
             <Route path="*" element={<NoPage />} />
           </Routes>
         </BrowserRouter>
