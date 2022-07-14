@@ -1,0 +1,19 @@
+{
+    "request": {
+      "url": "/api/v1/users",
+      "method": "POST",
+      "bodyPatterns" : [{
+      "matchesJsonPath" : {
+        "expression": "$",
+        "equalToJson": "{ 'Id':1, 'FirstName':'Oscar', 'LastName':'Contreras', 'Email':'oscar@oscar.co'}"
+        }
+      }]
+    },
+    "response": {
+      "status": 200,
+      "body": "ok",
+      "headers": {
+        "Content-Type": "application/json"
+      }
+    }
+  }
