@@ -1,11 +1,11 @@
 {
     "request": {
-      "url": "/api/v1/users",
+      "urlPathPattern": "/api/v1/users",
       "method": "GET"
     },
     "response": {
       "status": 200,
-      "body": "{ [ {'Id':1, 'FirstName':'Oscar', 'LastName':'Contreras', 'Email':'oscar@oscar.co'}, {'Id':1, 'FirstName':'Oscar', 'LastName':'Contreras', 'Email':'oscar@oscar.co'} ] }",
+      "body": "{ [ {'Id':1, 'FirstName':'Oscar', 'LastName':'Contreras', 'Email':'oscar@oscar.co'}, {'Id':2, 'FirstName':'Cristian', 'LastName':'Leyenda', 'Email':'cristian@cristian.co'} ] }",
       "headers": {
         "Content-Type": "application/json"
       }

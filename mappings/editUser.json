@@ -1,11 +1,15 @@
 {
     "request": {
-      "url": "/api/v1/users/1",
+      "urlPathPattern": "/api/v1/users",
       "method": "PUT",
+      "queryParameters": {
+        "id": {
+          "equalTo": "1"
+        },
       "bodyPatterns" : [{
         "matchesJsonPath" : {
           "expression": "$",
-          "equalToJson": "{ 'Id':1, 'FirstName':'Oscar', 'LastName':'Contreras', 'Email':'oscar@oscar.co'}"
+          "equalToJson": "{ 'FirstName':'Oscar', 'LastName':'Contreras', 'Email':'oscar@oscar.co', 'Password': 123456}"
           }
         }]
     },

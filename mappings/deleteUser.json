@@ -1,7 +1,12 @@
 { 
       "request": {
-        "url": "/api/v1/users/1",
-        "method": "DELETE"
+        "urlPathPattern": "/api/v1/users",
+        "method": "DELETE",
+        "queryParameters": {
+          "id": {
+            "equalTo": "1"
+          }
+      }
       },
       "response": {
         "status": 200,

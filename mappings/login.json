@@ -1,6 +1,6 @@
 {
     "request": {
-      "url": "/api/v1/users/login",
+      "urlPathPattern": "/api/v1/users/login",
       "method": "POST",
       "bodyPatterns" : [{
         "matchesJsonPath" : {
