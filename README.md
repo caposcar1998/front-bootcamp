@@ -2,28 +2,16 @@
 
 :)
 
+# Running app
 
-# Links
-https://www.alexhyett.com/mock-api-calls-wiremock
-# Running wiremock
-
-```bash
-docker run -it --rm -p 8080:8080 rodolpheche/wiremock
-```
-
-or
+## Production
 
 ```bash
-docker-compose up
+run-docker
 ```
 
-THEN run on docker
+## With wiremock
 
 ```bash
-http://localhost:8080/__admin/save
+make run-docker-dev
 ```
-
-```bash
-http://localhost:8080/__admin/reset
-```
-
