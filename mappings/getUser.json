@@ -1,16 +1,11 @@
 {
     "request": {
-      "urlPathPattern": "/api/v1/users",
-      "method": "GET",
-      "queryParameters": {
-        "id": {
-          "equalTo": "1"
-        }
-    }
+      "urlPathPattern": "/api/v1/users/1",
+      "method": "GET"
     },
     "response": {
       "status": 200,
-      "body": "{ 'Id':1, 'FirstName':'Oscar', 'LastName':'Contreras', 'Email':'oscar@oscar.co'}",
+      "body": "{ 'Id':1, 'FirstName':'Oscar', 'LastName':'Contreras', 'Email':'oscar@oscar.co', 'Password': '123456'}",
       "headers": {
         "Content-Type": "application/json"
       }

@@ -1,16 +1,11 @@
 { 
       "request": {
-        "urlPathPattern": "/api/v1/users",
-        "method": "DELETE",
-        "queryParameters": {
-          "id": {
-            "equalTo": "1"
-          }
-      }
+        "urlPathPattern": "/api/v1/users/1",
+        "method": "DELETE"
       },
       "response": {
         "status": 200,
-        "body": "true",
+        "body": true,
         "headers": {
           "Content-Type": "application/json"
         }

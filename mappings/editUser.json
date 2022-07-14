@@ -1,26 +1,23 @@
 {
     "request": {
-      "urlPathPattern": "/api/v1/users",
+      "urlPathPattern": "/api/v1/users/1",
       "method": "PUT",
-      "queryParameters": {
-        "id": {
-          "equalTo": "1"
-        },
       "bodyPatterns" : [{
         "matchesJsonPath" : {
           "expression": "$",
-          "equalToJson": "{ 'FirstName':'Oscar', 'LastName':'Contreras', 'Email':'oscar@oscar.co', 'Password': 123456}"
+          "equalToJson": "{ 'FirstName':'Oscar', 'LastName':'Contreras', 'Email':'oscar@oscar.co', 'Password': '123456'}"
           }
         }]
     },
     "response": {
       "status": 200,
-      "body": "{ \"res\": \"ok\" }",
+      "body": "ok",
       "headers": {
         "Content-Type": "application/json"
       }
     }
 }
+
 
 
 
