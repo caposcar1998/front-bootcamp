@@ -1,8 +1,9 @@
 DOCKER = docker
 COMPOSE = docker-compose
 COMPOSE_FILE = $(CURDIR)/infra/docker-compose.yml
+ENV = $(CURDIR)/.env
 
--include $(CURDIR)/.env.local
+-include $(ENV)
 export
 
 .PHONY: help
@@ -39,7 +40,7 @@ open-browser-dev: ## Open ports dev
 
 
 .PHONY: run-docker
-run-docker: run-dockerized-app open-browser ## Run with docker
+run-docker:  run-dockerized-app open-browser ## Run with docker
 
 .PHONY: run-docker-dev
 run-docker-dev: run-dockerized-app run-wiremock open-browser-dev ## Run with wiremock
