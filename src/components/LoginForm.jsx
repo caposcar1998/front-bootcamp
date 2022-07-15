@@ -1,50 +1,7 @@
 import { useState } from 'react'
-import { Box, Button, Paper, TextField } from '@mui/material'
-import { styled } from '@mui/material/styles'
-
-const isValidEmail = (email) => {
-  const re = /^([a-zA-Z0–9._%-]+@[a-zA-Z0–9.-]+\.[a-zA-Z]{2,6})*$/
-  return email !== '' && re.test(String(email).toLowerCase())
-}
-
-const isValidPassword = (password) => {
-  const re =
-    /(?=(.*[0-9]))(?=.*[!@#$%^&*()\\[\]{}\-_+=~`|:;"'<>,./?])(?=.*[a-z])(?=(.*[A-Z]))(?=(.*)).{8,}/
-  return password !== '' && re.test(String(password))
-}
-
-async function encryptPassword(password) {
-  const msgUint8 = new TextEncoder().encode(password)
-  const hashBuffer = await crypto.subtle.digest('SHA-256', msgUint8)
-  const hashArray = Array.from(new Uint8Array(hashBuffer))
-  const hashHex = hashArray.map((b) => b.toString(16).padStart(2, '0')).join('')
-  return hashHex
-}
-
-const StyledTextField = styled(TextField)({
-  marginBottom: '24px',
-  '& label.Mui-focused': {
-    color: '#000028'
-  },
-  '& .MuiOutlinedInput-root': {
-    '& fieldset': {
-      borderColor: '#000028'
-    },
-    '&:hover fieldset': {
-      borderColor: '#23D2AA'
-    },
-    '&.Mui-focused fieldset': {
-      borderColor: '#23D2AA'
-    }
-  }
-})
-
-const ColoredButton = styled(Button)({
-  backgroundColor: '#000028',
-  '&:hover': {
-    backgroundColor: '#23D2AA'
-  }
-})
+import { Box, Paper } from '@mui/material'
+import { ColoredButton, StyledTextField } from '.'
+import { encryptPassword, isValidEmail, isValidPassword } from 'utils'
 
 export default function LoginForm() {
   const [userData, setUserData] = useState({

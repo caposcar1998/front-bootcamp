@@ -1,4 +1,6 @@
+export { default as ColoredButton } from './ColoredButton'
 export { default as LoginForm } from './LoginForm'
+export { default as StyledTextField } from './StyledTextField'
 export { default as UserForm } from './UserForm'
-export { UsersTable } from './table'
 export { Layout } from './layout'
+export { UsersTable } from './table'
