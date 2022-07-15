@@ -1,4 +1,7 @@
+import { useEffect, useState } from 'react'
+import axios from 'axios'
 import { UsersTable } from 'components'
+import { BACKEND_URL } from 'constant'
 
 const columns = [
   { id: 'id', label: 'ID' },
@@ -8,12 +11,41 @@ const columns = [
   { id: 'delete', label: '' }
 ]
 
-const fakeUsers = [
-  { id: 1, name: 'Leanne Graham', email: 'test@test.com' },
-  { id: 2, name: 'Ervin Howell', email: 'test2@test.com' },
-  { id: 3, name: 'Clementine Bauch', email: 'test3@test.com' }
-]
+const fetchUsers = async () => {
+  const results = await axios.get(`${BACKEND_URL}/api/v1/users`)
+  return results.data
+}
 
 export default function Users() {
-  return <UsersTable columns={columns} users={fakeUsers} />
+  const [users, setUsers] = useState([])
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(false)
+  const [refetch, setRefetch] = useState(true)
+
+  useEffect(() => {
+    if (refetch) {
+      setLoading(true)
+      fetchUsers()
+        .then((data) => {
+          setUsers(data)
+          setLoading(false)
+          setRefetch(false)
+        })
+        .catch(() => {
+          setError(true)
+          setLoading(false)
+          setRefetch(false)
+        })
+    }
+  }, [refetch])
+
+  return (
+    <UsersTable
+      columns={columns}
+      errorFetchingUsers={error}
+      loadingUsers={loading}
+      users={users}
+      refetch={setRefetch}
+    />
+  )
 }
