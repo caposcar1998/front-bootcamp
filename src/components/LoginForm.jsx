@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import { Box, Paper } from '@mui/material'
+import axios from 'axios'
 import { ColoredButton, StyledTextField } from '.'
+import { BACKEND_URL } from 'constant'
 import { isValidEmail, isValidPassword } from 'utils'
 
 export default function LoginForm() {
@@ -9,13 +11,16 @@ export default function LoginForm() {
     password: ''
   })
 
+  const [loading, setLoading] = useState(false)
+
   const [dataError, setDataError] = useState({
     email: false,
-    password: false
+    password: false,
+    login: false
   })
 
   const handleChange = (event) => {
-    setDataError({ ...dataError, [event.target.name]: false })
+    setDataError({ ...dataError, login: false, [event.target.name]: false })
     setUserData({
       ...userData,
       [event.target.name]: event.target.value
@@ -35,12 +40,28 @@ export default function LoginForm() {
     })
   }
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async () => {
     if (isValidEmail(userData.email) && isValidPassword(userData.password)) {
-      // TODO: AXIOS POST request to server
-      // TODO: Redirect to dashboard if ok
-      // TODO: Error message if not ok
-      console.log(`Email: ${userData.email} Password: ${userData.password}`)
+      setLoading(true)
+      try {
+        const loginResult = await axios.post(
+          `${BACKEND_URL}/api/v1/users/login`,
+          userData
+        )
+        if (loginResult.status === 200 && loginResult.data.Id) {
+          sessionStorage.setItem('loggedUser', JSON.stringify(loginResult.data))
+          window.location.reload()
+        } else {
+          setDataError({ ...dataError, login: true })
+          setLoading(false)
+        }
+      } catch {
+        setDataError({
+          ...dataError,
+          login: true
+        })
+        setLoading(false)
+      }
     }
     if (!isValidEmail(userData.email)) {
       setDataError((currentData) => ({ ...currentData, email: true }))
@@ -73,7 +94,7 @@ export default function LoginForm() {
           width="100%"
         >
           <StyledTextField
-            error={dataError.email}
+            error={dataError.email || dataError.login}
             helperText={dataError.email ? 'Invalid email address' : ''}
             name="email"
             label="Email"
@@ -84,11 +105,13 @@ export default function LoginForm() {
             onBlur={handleError}
           />
           <StyledTextField
-            error={dataError.password}
+            error={dataError.password || dataError.login}
             helperText={
               dataError.password
                 ? 'Password must be at least 8 characters long and contain at least one number, one special character and one uppercase letter'
-                : ''
+                : dataError.login
+                  ? 'Invalid email or password'
+                  : ''
             }
             name="password"
             label="Password"
@@ -102,9 +125,10 @@ export default function LoginForm() {
             onClick={handleSubmit}
             size="large"
             type="submit"
+            disabled={loading}
             variant="contained"
           >
-            SIGN IN
+            {!loading ? 'SIGN IN' : 'SIGNING IN...'}
           </ColoredButton>
         </Box>
       </Paper>
