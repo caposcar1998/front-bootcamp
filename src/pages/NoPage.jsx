@@ -1,6 +1,6 @@
 import { Button } from '@mui/material'
 import { Container } from '@mui/system'
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom'
 
 export default function NoPage() {
   function reloadPage() {
