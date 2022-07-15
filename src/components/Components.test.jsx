@@ -1,16 +1,10 @@
 import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import LoginForm from './LoginForm'
-import UserForm from './UserForm'
+import { BrowserRouter } from 'react-router-dom'
 
 test('Renders Login form', () => {
-  render(<LoginForm />)
+  render(<BrowserRouter> <LoginForm/> </BrowserRouter>)
   const linkElement = screen.getByText(/SIGN IN/i)
-  expect(linkElement).toBeInTheDocument()
-})
-
-test('Renders user form', () => {
-  render(<UserForm />)
-  const linkElement = screen.getByText(/Create user/i)
   expect(linkElement).toBeInTheDocument()
 })

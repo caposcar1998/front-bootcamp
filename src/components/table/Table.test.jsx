@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import { TableHeader, UserRow, UsersTable } from '.'
+import { BrowserRouter } from 'react-router-dom'
 
 const columns = [
   { id: 'id', label: 'ID' },
@@ -17,20 +18,20 @@ const fakeUsers = [
 ]
 
 test('Renders table header', () => {
-  render(<TableHeader columns={columns} />)
+  render(<BrowserRouter> <TableHeader columns={columns} /> </BrowserRouter>)
   const linkElement = screen.getByText(/id/i)
   expect(linkElement).toBeInTheDocument()
 })
 
 test('Renders rows', () => {
   const user = { id: 1, name: 'John', email: 'oscar@oscar.com' }
-  render(<UserRow user={user} />)
+  render(<BrowserRouter> <UserRow user={user} /> </BrowserRouter>)
   const linkElement = screen.getByText(/John/i)
   expect(linkElement).toBeInTheDocument()
 })
 
 test('Renders user table', () => {
-  render(<UsersTable columns={columns} users= {fakeUsers}/>)
+  render(<BrowserRouter> <UsersTable columns={columns} users= {fakeUsers}/> </BrowserRouter>)
   const headerElement = screen.getByText(/Leanne Graham/i)
   expect(headerElement).toBeInTheDocument()
 })
