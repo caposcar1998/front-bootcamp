@@ -2,12 +2,16 @@
 
 :)
 
-# Running wiremock
+# Running app
+
+## Production
 
 ```bash
-docker run -it --rm \
-  -p 8080:8080 \
-  --name wiremock \
-  wiremock/wiremock:2.33.2
+run-docker
+```
 
+## With wiremock
+
+```bash
+make run-docker-dev
 ```
