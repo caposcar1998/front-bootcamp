@@ -1,10 +1,12 @@
 import { useNavigate } from 'react-router-dom'
 import Swal from 'sweetalert2'
+import axios from 'axios'
 import { IconButton, TableRow, TableCell, Tooltip } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete'
 import BorderColorIcon from '@mui/icons-material/BorderColor'
+import { BACKEND_URL } from 'constant'
 
-export default function UserRow({ user: { id, name, email } }) {
+export default function UserRow({ user: { id, name, email }, refetch }) {
   const navigate = useNavigate()
 
   const handleUserDeletion = () => {
@@ -18,6 +20,24 @@ export default function UserRow({ user: { id, name, email } }) {
       confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
       if (result.isConfirmed) {
+        axios
+          .delete(`${BACKEND_URL}/api/users/${id}`)
+          .then(({ status }) => {
+            if (status === 200) {
+              Swal.fire({
+                title: 'Deleted!',
+                text: `User ${email} has been deleted.`,
+                icon: 'success'
+              }).then(() => refetch(true))
+            }
+          })
+          .catch(() => {
+            Swal.fire({
+              title: 'Error!',
+              text: `User ${email} could not be deleted.`,
+              icon: 'error'
+            })
+          })
         Swal.fire('Deleted!', 'The user has been deleted.', 'success')
       }
     })
