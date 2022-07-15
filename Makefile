@@ -1,10 +1,6 @@
 DOCKER = docker
 COMPOSE = docker-compose
 COMPOSE_FILE = $(CURDIR)/infra/docker-compose.yml
-ENV = $(CURDIR)/.env
-
--include $(ENV)
-export
 
 .PHONY: help
 help: ## Displays help menu
