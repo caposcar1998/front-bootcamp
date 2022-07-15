@@ -1,118 +1,83 @@
-# main.tf
+terraform {
+  required_providers {
+      aws = {
+          source = "hashicorp/aws"
+          version = "~> 3.0"
+      }
+  }
+}
+
 provider "aws" {
   region = "us-east-2"
 }
 
-terraform {
-  required_version = ">= 0.12.0"
+resource "aws_ecr_repository" "bootcamp_frontend" {
+  name = "frontend"
 }
 
-data "aws_vpc" "default" {
-  default = true
+resource "aws_ecs_cluster" "cluster_frontend" {
+  name = "ftontend_cluster"
 }
 
-data "aws_subnet_ids" "all" {
-  vpc_id = data.aws_vpc.default.id
+resource "aws_ecs_task_definition" "frontend_definition" {
+  family = "frontend-family"
+  container_definitions = <<DEFINITION
+  [
+      {
+          "name": "task_front",
+          "image": "${aws_ecr_repository.bootcamp_frontend.repository_url}",
+          "essential": true,
+          "portMapppings" : [
+              {
+              "containerPort": 3000,
+              "hostPort": 3000
+              }
+          ],
+  "memory": 512,
+  "cpu": 256
+}
+]
+DEFINITION
+requires_compatibilities = ["FARGATE"]
+network_mode = "awsvpc"
+memory = 512
+cpu = 256
+execution_role_arn = "${aws_iam_role.ecsTaskExecutionRole.arn}"
 }
 
-### ECR
-
-resource "aws_ecr_repository" "front-bootcamp" {
-  name                 = "frontend"
-  image_tag_mutability = "MUTABLE"
-
-  tags = {
-    project = "frontend"
-  }
+resource "aws_iam_role" "ecsTaskExecutionRole" {
+  name = "ecsTaskExecutionRole"
+  assume_role_policy = "${data.aws_iam_policy_document.assume_role_policy.json}"
 }
 
-data "aws_ami" "amazon_linux_2" {
-  most_recent = true
-  owners      = ["amazon"]
+data "aws_iam_policy_document" "assume_role_policy" {
+  statement {
+    actions = ["sts:AssumeRole"]
 
-  filter {
-    name   = "name"
-    values = ["amzn2-ami-hvm-*-x86_64-ebs"]
-  }
-}
-
-resource "aws_iam_role" "ec2_role_front_bootcamp" {
-  name = "ec2_role_front_bootcamp"
-
-  assume_role_policy = <<EOF
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Action": "sts:AssumeRole",
-      "Principal": {
-        "Service": "ec2.amazonaws.com"
-      },
-      "Effect": "Allow",
-      "Sid": ""
+    principals {
+        type = "Service"
+        identifiers = ["ecs-tasks.amazonaws.com"]
     }
-  ]
-}
-EOF
-
-  tags = {
-    project = "frontend"
   }
 }
 
-resource "aws_iam_instance_profile" "ec2_role_front_bootcamp" {
-  name = "ec2_role_front_bootcamp"
-  role = aws_iam_role.ec2_role_front_bootcamp.name
-}
+resource "aws_ecs_service" "front_service" {
+    name = "front_service"
+    cluster = "${aws_ecs_cluster.cluster_frontend.id}"
+    task_definition = "${aws_ecs_task_definition.frontend_definition.arn}"
+    launch_type = "FARGATE"
+    desired_count = 1
 
-resource "aws_iam_role_policy" "ec2_policy" {
-  name = "ec2_policy"
-  role = aws_iam_role.ec2_role_front_bootcamp.id
-
-  policy = <<EOF
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Action": [
-        "ecr:GetAuthorizationToken",
-        "ecr:BatchGetImage",
-        "ecr:GetDownloadUrlForLayer"
-      ],
-      "Effect": "Allow",
-      "Resource": "*"
+    network_configuration {
+      subnets = ["${aws_default_subnet.default_subnet.id} "]
+      assign_public_ip = true
     }
-  ]
-}
-EOF
+  
 }
 
-resource "aws_instance" "web" {
-  ami           = data.aws_ami.amazon_linux_2.id
-  instance_type = "t3.micro"
+resource "aws_default_vpc" "default_vpc" {
+}
 
-  root_block_device {
-    volume_size = 8
-  }
-
-  user_data = <<-EOF
-    #!/bin/bash
-    set -ex
-    sudo yum update -y
-    sudo amazon-linux-extras install docker -y
-    sudo service docker start
-    sudo usermod -a -G docker ec2-user
-    sudo curl -L https://github.com/docker/compose/releases/download/1.25.4/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
-    sudo chmod +x /usr/local/bin/docker-compose
-  EOF
-
-  iam_instance_profile = aws_iam_instance_profile.ec2_role_front_bootcamp.name
-
-  tags = {
-    project = "frontend"
-  }
-
-  monitoring              = true
-  disable_api_termination = false
-  ebs_optimized           = true
+resource "aws_default_subnet" "default_subnet" {
+  availability_zone = "us-east-2a"
 }
