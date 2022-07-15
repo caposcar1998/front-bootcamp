@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Box, Paper } from '@mui/material'
 import { ColoredButton, StyledTextField } from '.'
-import { encryptPassword, isValidEmail, isValidPassword } from 'utils'
+import { isValidEmail, isValidPassword } from 'utils'
 
 export default function LoginForm() {
   const [userData, setUserData] = useState({
@@ -37,11 +37,10 @@ export default function LoginForm() {
 
   const handleSubmit = async (event) => {
     if (isValidEmail(userData.email) && isValidPassword(userData.password)) {
-      const encryptedPassword = await encryptPassword(userData.password)
       // TODO: AXIOS POST request to server
       // TODO: Redirect to dashboard if ok
       // TODO: Error message if not ok
-      console.log(`Email: ${userData.email} Password: ${encryptedPassword}`)
+      console.log(`Email: ${userData.email} Password: ${userData.password}`)
     }
     if (!isValidEmail(userData.email)) {
       setDataError((currentData) => ({ ...currentData, email: true }))

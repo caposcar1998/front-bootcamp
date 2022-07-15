@@ -1,12 +1,7 @@
 import { useState } from 'react'
 import { Box, Paper } from '@mui/material'
 import { ColoredButton, StyledTextField } from '.'
-import {
-  encryptPassword,
-  isValidName,
-  isValidEmail,
-  isValidPassword
-} from 'utils'
+import { isValidName, isValidEmail, isValidPassword } from 'utils'
 
 export default function UserForm({ user }) {
   const [userData, setUserData] = useState({
@@ -76,7 +71,6 @@ export default function UserForm({ user }) {
       isValidEmail(userData.email) &&
       isValidPassword(userData.password)
     ) {
-      const encryptedPassword = await encryptPassword(userData.password)
       // TODO: AXIOS POST request to server
       // TODO: Redirect to dashboard if ok
       // TODO: Error message if not ok
@@ -84,7 +78,7 @@ export default function UserForm({ user }) {
         FirstName: userData.firstName,
         LastName: userData.surName,
         Email: userData.email,
-        Password: encryptedPassword
+        Password: userData.password
       }
       const userDataJson = JSON.stringify(dataObject)
       console.log(`User data: ${userDataJson}`)
