@@ -1,10 +1,10 @@
-{ 
-      "request": {
-        "urlPathPattern": "/api/v1/users/1",
-        "method": "DELETE"
-      },
-      "response": {
-        "status": 200,
-        "body": true
-      }
-    }
+{
+  "request": {
+    "urlPathPattern": "/api/v1/users/1",
+    "method": "DELETE"
+  },
+  "response": {
+    "status": 200,
+    "body": true
+  }
+}
