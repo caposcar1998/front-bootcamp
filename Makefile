@@ -17,6 +17,11 @@ run-dockerized-app: ## Run dockerize app
 	$(COMPOSE) -f $(COMPOSE_FILE) build app
 	$(COMPOSE) -f $(COMPOSE_FILE) up -d app
 
+.PHONY: run-prod-app
+run-prod-app: ## Run prod app
+	$(COMPOSE) -f $(COMPOSE_FILE) build prod
+	$(COMPOSE) -f $(COMPOSE_FILE) up -d prod
+
 run-wiremock: ## Run app in test
 	$(COMPOSE) -f $(COMPOSE_FILE) build wiremock
 	$(COMPOSE) -f $(COMPOSE_FILE) up -d wiremock
@@ -36,7 +41,7 @@ open-browser-dev: ## Open ports dev
 
 
 .PHONY: run-docker
-run-docker:  run-dockerized-app open-browser ## Run with docker
+run-docker:  run-prod-app open-browser ## Run with docker
 
 .PHONY: run-docker-dev
 run-docker-dev: run-dockerized-app run-wiremock open-browser-dev ## Run with wiremock

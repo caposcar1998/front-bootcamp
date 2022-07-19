@@ -9,8 +9,9 @@ import {
   TableContainer,
   Table,
   TableBody,
-  TablePagination,
   TableCell,
+  TableRow,
+  TablePagination,
   Tooltip
 } from '@mui/material'
 import AddCircleIcon from '@mui/icons-material/AddCircle'
@@ -62,56 +63,60 @@ export default function UsersTable({
             <TableHeader columns={columns} />
             <TableBody>
               {loadingUsers ? (
-                <TableCell colSpan={5}>
-                  <Stack width="100%" spacing={1}>
-                    <Skeleton
-                      animation="wave"
-                      variant="rectangular"
-                      width="100%"
-                      height={50}
-                    />
-                    <Skeleton
-                      animation="wave"
-                      variant="rectangular"
-                      width="100%"
-                      height={50}
-                    />
-                    <Skeleton
-                      animation="wave"
-                      variant="rectangular"
-                      width="100%"
-                      height={50}
-                    />
-                    <Skeleton
-                      animation="wave"
-                      variant="rectangular"
-                      width="100%"
-                      height={50}
-                    />
-                    <Skeleton
-                      animation="wave"
-                      variant="rectangular"
-                      width="100%"
-                      height={50}
-                    />
-                    <Skeleton
-                      animation="wave"
-                      variant="rectangular"
-                      width="100%"
-                      height={50}
-                    />
-                    <Skeleton
-                      animation="wave"
-                      variant="rectangular"
-                      width="100%"
-                      height={50}
-                    />
-                  </Stack>
-                </TableCell>
+                <TableRow>
+                  <TableCell colSpan={5}>
+                    <Stack width="100%" spacing={1}>
+                      <Skeleton
+                        animation="wave"
+                        variant="rectangular"
+                        width="100%"
+                        height={50}
+                      />
+                      <Skeleton
+                        animation="wave"
+                        variant="rectangular"
+                        width="100%"
+                        height={50}
+                      />
+                      <Skeleton
+                        animation="wave"
+                        variant="rectangular"
+                        width="100%"
+                        height={50}
+                      />
+                      <Skeleton
+                        animation="wave"
+                        variant="rectangular"
+                        width="100%"
+                        height={50}
+                      />
+                      <Skeleton
+                        animation="wave"
+                        variant="rectangular"
+                        width="100%"
+                        height={50}
+                      />
+                      <Skeleton
+                        animation="wave"
+                        variant="rectangular"
+                        width="100%"
+                        height={50}
+                      />
+                      <Skeleton
+                        animation="wave"
+                        variant="rectangular"
+                        width="100%"
+                        height={50}
+                      />
+                    </Stack>
+                  </TableCell>
+                </TableRow>
               ) : errorFetchingUsers ? (
-                <TableCell colSpan={5}>
-                  Something went wrong and users could not be loaded
-                </TableCell>
+                <TableRow>
+                  <TableCell colSpan={5}>
+                    Something went wrong and users could not be loaded
+                  </TableCell>
+                </TableRow>
               ) : users.length ? (
                 users
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
@@ -125,7 +130,9 @@ export default function UsersTable({
                     )
                   })
               ) : (
-                <TableCell colSpan={5}>No users registered yet...</TableCell>
+                <TableRow>
+                  <TableCell colSpan={5}>No users registered yet...</TableCell>
+                </TableRow>
               )}
             </TableBody>
           </Table>
