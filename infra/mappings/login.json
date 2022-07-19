@@ -5,12 +5,12 @@
       "bodyPatterns" : [{
         "matchesJsonPath" : {
           "expression": "$",
-          "equalToJson": "{'email': 'oscar@oscar.com', 'password': 'Quieromimir1#'}"
+          "equalToJson": {"email": "oscar@oscar.com", "password": "Quieromimir1#"}
           }
         }]
     },
     "response": {
       "status": 200,
-      "body": { "Id":1, "FirstName":"Oscar", "LastName":"Contreras", "Email":"oscar@oscar.co", "Password": "Quieromimir1#"}
+      "body": "{ 'Id':1, 'FirstName':'Oscar', 'LastName':'Contreras', 'Email':'oscar@oscar.co', 'Password': 'Quieromimir1#'}"
     }
   }

@@ -12,6 +12,6 @@
     "response": {
       "status": 200,
       
-      "body": {"FirstName":"Oscar", "LastName":"Contreras", "Email":"oscar@oscar.co", "Password": "123456"}
+      "body": "{'FirstName':'Oscar', 'LastName':'Contreras', 'Email':'oscar@oscar.co', 'Password': '123456'}"
     }
   }
