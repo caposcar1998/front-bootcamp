@@ -11,6 +11,6 @@
     },
     "response": {
       "status": 200,
-      "body": "{ 'Id':1, 'FirstName':'Oscar', 'LastName':'Contreras', 'Email':'oscar@oscar.co', 'Password': 'Quieromimir1#'}"
+      "jsonBody": { "Id":1, "FirstName":"Oscar", "LastName":"Contreras", "Email":"oscar@oscar.co", "Password": "Quieromimir1#"}
     }
   }
