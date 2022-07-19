@@ -5,7 +5,7 @@
       "bodyPatterns" : [{
         "matchesJsonPath" : {
           "expression": "$",
-          "equalToJson": { "FirstName":"Oscar", "LastName":"Contreras", "Email":"oscar@oscar.co", "Password": "123456"}
+          "equalToJson": "{'FirstName':'Oscar', 'LastName':'Contreras', 'Email':'oscar@oscar.co', 'Password': '123456'}"
           }
         }]
     },
