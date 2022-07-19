@@ -1,20 +1,18 @@
 {
-    "request": {
-      "urlPathPattern": "/api/v1/users/1",
-      "method": "PUT",
-      "bodyPatterns" : [{
-        "matchesJsonPath" : {
+  "request": {
+    "urlPathPattern": "/api/v1/users/1",
+    "method": "PUT",
+    "bodyPatterns": [
+      {
+        "matchesJsonPath": {
           "expression": "$",
-          "equalToJson": "{'FirstName':'Oscar', 'LastName':'Contreras', 'Email':'oscar@oscar.co', 'Password': '123456'}"
-          }
-        }]
-    },
-    "response": {
-      "status": 200,
-      "body": "ok"
-    }
+          "equalToJson": "{'firstName':'Oscar', 'lastName':'Contreras', 'email':'oscar@oscar.co', 'password': 'Quieromimir2$'}"
+        }
+      }
+    ]
+  },
+  "response": {
+    "status": 200,
+    "body": "ok"
+  }
 }
-
-
-
-

@@ -1,10 +1,25 @@
 {
-    "request": {
-      "urlPathPattern": "/api/v1/users",
-      "method": "GET"
-    },
-    "response": {
-      "status": 200,
-      "jsonBody": [ {"Id":1, "FirstName":"Oscar", "LastName":"Contreras", "Email":"oscar@oscar.co", "Password": "123456"}, {"Id":2, "FirstName":"Cristian", "LastName":"Leyenda", "Email":"cristian@cristian.co", "Password": "654321"} ]
-    }
+  "request": {
+    "urlPathPattern": "/api/v1/users",
+    "method": "GET"
+  },
+  "response": {
+    "status": 200,
+    "jsonBody": [
+      {
+        "id": 1,
+        "firstName": "Oscar",
+        "lastName": "Contreras",
+        "email": "oscar@oscar.co",
+        "password": "123456"
+      },
+      {
+        "id": 2,
+        "firstName": "Cristian",
+        "lastName": "Leyenda",
+        "email": "cristian@cristian.co",
+        "password": "654321"
+      }
+    ]
   }
+}

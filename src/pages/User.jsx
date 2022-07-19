@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import axios from 'axios'
 import { UserForm } from 'components'
+import { BACKEND_URL } from 'constant'
 
 export default function User() {
   const [queryParams] = useSearchParams()
@@ -15,12 +16,14 @@ export default function User() {
     if (userId) {
       setLoading(true)
       axios
-        .get(`/api/v1/users/${userId}`)
+        .get(`${BACKEND_URL}/api/v1/users/${userId}`)
         .then(({ data }) => {
           setUser(data)
+          setLoading(false)
         })
         .catch(() => {
-          setUser({})
+          setUser(null)
+          setLoading(false)
           setError(true)
         })
     }

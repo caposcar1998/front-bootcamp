@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { Box, Paper, Stack, Skeleton, Typography } from '@mui/material'
@@ -10,11 +10,45 @@ export default function UserForm({ user, loadingUser, errorFetchingUser }) {
   const navigate = useNavigate()
 
   const [userData, setUserData] = useState({
-    firstName: user?.firstName || '',
-    surName: user?.lastName || '',
-    email: user?.email || '',
+    firstName: '',
+    surName: '',
+    email: '',
     password: ''
   })
+  const [changesMade, setChangesMade] = useState(false)
+
+  useEffect(() => {
+    if (user) {
+      setUserData((currentData) => ({
+        ...currentData,
+        firstName: user.firstName,
+        surName: user.lastName,
+        email: user.email
+      }))
+    }
+  }, [user])
+
+  useEffect(() => {
+    if (
+      user &&
+      (user.firstName !== userData.firstName ||
+        user.lastName !== userData.surName ||
+        user.email !== userData.email ||
+        (userData.password !== '' && userData.password !== user.password))
+    ) {
+      return setChangesMade(true)
+    } else if (
+      !user &&
+      (userData.firstName !== '' ||
+        userData.surName !== '' ||
+        userData.email !== '' ||
+        userData.password !== '')
+    ) {
+      return setChangesMade(true)
+    } else {
+      return setChangesMade(false)
+    }
+  }, [userData])
 
   const [dataError, setDataError] = useState({
     firstName: false,
@@ -67,7 +101,11 @@ export default function UserForm({ user, loadingUser, errorFetchingUser }) {
       case 'password':
         return setDataError({
           ...dataError,
-          password: !isValidPassword(event.target.value)
+          password: user?.password
+            ? !(
+                event.target.value === '' || isValidPassword(event.target.value)
+              )
+            : !isValidPassword(event.target.value)
         })
     }
   }
@@ -78,14 +116,16 @@ export default function UserForm({ user, loadingUser, errorFetchingUser }) {
       isValidName(userData.firstName) &&
       isValidName(userData.surName) &&
       isValidEmail(userData.email) &&
-      isValidPassword(userData.password)
+      (user?.password
+        ? userData.password === '' || isValidPassword(userData.password)
+        : isValidPassword(userData.password))
     ) {
       setLoading(true)
       const dataObject = {
-        FirstName: userData.firstName,
-        LastName: userData.surName,
-        Email: userData.email,
-        Password: userData.password
+        firstName: userData.firstName,
+        lastName: userData.surName,
+        email: userData.email,
+        password: userData.password || user.password
       }
       if (user) {
         await axios
@@ -122,7 +162,7 @@ export default function UserForm({ user, loadingUser, errorFetchingUser }) {
     if (!isValidEmail(userData.email)) {
       setDataError((currentData) => ({ ...currentData, email: true }))
     }
-    if (!isValidPassword(userData.password)) {
+    if (!isValidPassword(userData.password) && !user?.password) {
       setDataError((currentData) => ({ ...currentData, password: true }))
     }
   }
@@ -232,7 +272,7 @@ export default function UserForm({ user, loadingUser, errorFetchingUser }) {
           )}
           <ColoredButton
             onClick={handleSubmit}
-            disabled={errorFetchingUser || loading}
+            disabled={errorFetchingUser || loading || !changesMade}
             size="large"
             type="submit"
             variant="contained"
