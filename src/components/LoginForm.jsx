@@ -48,7 +48,7 @@ export default function LoginForm() {
           `${BACKEND_URL}/api/v1/users/login`,
           userData
         )
-        if (loginResult.status === 200 && loginResult.data.Id) {
+        if (loginResult.status === 200 && loginResult.data.id) {
           sessionStorage.setItem('loggedUser', JSON.stringify(loginResult.data))
           window.location.reload()
         } else {

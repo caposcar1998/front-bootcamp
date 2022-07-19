@@ -21,7 +21,7 @@ export default function UserRow({ user: { id, name, email }, refetch }) {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .delete(`${BACKEND_URL}/api/users/${id}`)
+          .delete(`${BACKEND_URL}/api/v1/users/${id}`)
           .then(({ status }) => {
             if (status === 200) {
               Swal.fire({

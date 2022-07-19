@@ -27,7 +27,12 @@ export default function Users() {
       setLoading(true)
       fetchUsers()
         .then((data) => {
-          setUsers(data)
+          setUsers(
+            data.map((user) => ({
+              ...user,
+              name: `${user.firstName} ${user.lastName}`
+            }))
+          )
           setLoading(false)
           setRefetch(false)
         })
