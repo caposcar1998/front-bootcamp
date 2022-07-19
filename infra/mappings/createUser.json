@@ -5,22 +5,13 @@
       "bodyPatterns" : [{
       "matchesJsonPath" : {
         "expression": "$",
-        "equalToJson": "{'FirstName':'Oscar', 'LastName':'Contreras', 'Email':'oscar@oscar.co', 'Password': '123456'}"
+        "equalToJson": {"FirstName":"Oscar", "LastName":"Contreras", "Email":"oscar@oscar.co", "Password": "123456"}
         }
       }]
     },
     "response": {
       "status": 200,
       
-      "body": "{'FirstName':'Oscar', 'LastName':'Contreras', 'Email':'oscar@oscar.co', 'Password': '123456'}",
-      "headers": {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin" : "*",
-        "Access-Control-Allow-Methods" : "*",
-        "Access-Control-Allow-Headers": "Accept, Content-Type, Content-Encoding, Server, Transfer-Encoding",
-        "X-Content-Type-Options" : "nosniff",
-        "x-frame-options" : "DENY",
-        "x-xss-protection" : "1; mode=block"
-      }
+      "body": {"FirstName":"Oscar", "LastName":"Contreras", "Email":"oscar@oscar.co", "Password": "123456"}
     }
   }

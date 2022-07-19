@@ -5,15 +5,6 @@
     },
     "response": {
       "status": 200,
-      "body": "{ 'Id':1, 'FirstName':'Oscar', 'LastName':'Contreras', 'Email':'oscar@oscar.co', 'Password': '123456'}",
-      "headers": {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin" : "*",
-        "Access-Control-Allow-Methods" : "*",
-        "Access-Control-Allow-Headers": "Accept, Content-Type, Content-Encoding, Server, Transfer-Encoding",
-        "X-Content-Type-Options" : "nosniff",
-        "x-frame-options" : "DENY",
-        "x-xss-protection" : "1; mode=block"
-      }
+      "body": { "Id":1, "FirstName":"Oscar", "LastName":"Contreras", "Email":"oscar@oscar.co", "Password": "123456"}
     }
 }
