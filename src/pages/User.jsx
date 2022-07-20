@@ -16,7 +16,7 @@ export default function User() {
     if (userId) {
       setLoading(true)
       axios
-        .get(`${BACKEND_URL}/api/v1/users/${userId}`)
+        .get(`${BACKEND_URL}/api/v1/users/${userId}?id=${userId}`)
         .then(({ data }) => {
           setUser(data)
           setLoading(false)
