@@ -129,7 +129,10 @@ export default function UserForm({ user, loadingUser, errorFetchingUser }) {
       }
       if (user) {
         await axios
-          .put(`${BACKEND_URL}/api/v1/users/${user.id}`, dataObject)
+          .put(
+            `${BACKEND_URL}/api/v1/users/${user.id}?id=${user.id}`,
+            dataObject
+          )
           .then(() => {
             setLoading(false)
             setError(false)
