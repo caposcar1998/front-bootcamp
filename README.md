@@ -1,7 +1,5 @@
 # TAREK Frontend Dashboard
 
-:)
-
 # Running app
 
 ## Production
